@@ -24,11 +24,21 @@ public class NaiveBayesClassifier {
 	private HashMap<String, String> testSet;
 	
 	public void classify(String name) {
-		String predictedGender = (this.nameLengthFeature(name).equals("F")) ? "Female" : "Male";
-		System.out.println(predictedGender + "\tBy P(class|Length) and average name length ");
+		int result = 0;
 		
-		predictedGender = (this.namesEndingInVowelFeature(name).equals("F")) ? "Female" : "Male";
-		System.out.println(predictedGender + "\tBy P(class|ending=vowel) ");
+		String predictedGenderByNameLength = (this.nameLengthFeature(name).equals("F")) ? "Female" : "Male";
+		System.out.println(predictedGenderByNameLength + "\tBy P(class|Length) and average name length ");
+		//result = (predictedGenderByNameLength.equals("Female")) ? result++ : result;
+		if (predictedGenderByNameLength.equals("Female"))	result++;
+		LOG.info("result: " + result);
+		
+		String predictedGenderByEndingVowel = (this.namesEndingInVowelFeature(name).equals("F")) ? "Female" : "Male";
+		//result = (predictedGenderByEndingVowel.equals("Female")) ? result++ : result;
+		if (predictedGenderByEndingVowel.equals("Female"))	result++;
+		System.out.println(predictedGenderByEndingVowel + "\tBy P(class|ending=vowel) ");
+		LOG.info("result: " + result);
+		
+		System.out.println("\nResult:\t" + ((result >= 2) ? "Female" : "Male") + "\n");
 	}
 	
 	public NaiveBayesClassifier(Session session) {
