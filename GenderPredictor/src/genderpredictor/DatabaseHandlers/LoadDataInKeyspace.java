@@ -4,7 +4,9 @@ import com.datastax.driver.core.Session;
 import com.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -30,11 +32,16 @@ public class LoadDataInKeyspace {
             String[] row;
             while((row = reader.readNext()) != null) 
                 dataset.put(row[0].toUpperCase(), row[1].toUpperCase());
-            // TODO: Put values in database table
-            // TODO: Display values on console
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+        // Adding values in gender.genderTable
+        for (Map.Entry<String, String> data: dataset.entrySet()) {
+        	String indianName = data.getKey();
+        	String gender = data.getValue();
+        	String query = "INSERT INTO gender.genderTable (indianname, gender) "
+        			+ "VALUES (?, ?);";
+        	session.execute(query,indianName, gender);
+        }
     }
 }
