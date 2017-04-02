@@ -32,7 +32,8 @@ public class GenderPredictor {
         
         // TODO: implement basic naives bayes classifier
         NaiveBayesClassifier nb = new NaiveBayesClassifier(session);
-        
+        nb.testModel();
+        nb.classify("");
         // TODO: implement naives bayes classifier with feature selection options
         // TODO: Use model for predictions
         
