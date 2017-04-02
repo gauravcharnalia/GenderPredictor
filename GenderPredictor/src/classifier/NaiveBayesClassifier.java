@@ -30,13 +30,19 @@ public class NaiveBayesClassifier {
 		System.out.println(predictedGenderByNameLength + "\tBy P(class|Length) and average name length ");
 		//result = (predictedGenderByNameLength.equals("Female")) ? result++ : result;
 		if (predictedGenderByNameLength.equals("Female"))	result++;
-		LOG.info("result: " + result);
+		//LOG.info("result: " + result);
 		
 		String predictedGenderByEndingVowel = (this.namesEndingInVowelFeature(name).equals("F")) ? "Female" : "Male";
 		//result = (predictedGenderByEndingVowel.equals("Female")) ? result++ : result;
 		if (predictedGenderByEndingVowel.equals("Female"))	result++;
 		System.out.println(predictedGenderByEndingVowel + "\tBy P(class|ending=vowel) ");
-		LOG.info("result: " + result);
+		//LOG.info("result: " + result);
+		
+		String predictedGenderByEnding= (this.namesEndingInVowelFeature(name).equals("F")) ? "Female" : "Male";
+		//result = (predictedGenderByEndingVowel.equals("Female")) ? result++ : result;
+		if (predictedGenderByEnding.equals("Female"))	result++;
+		System.out.println(predictedGenderByEnding + "\tBy P(class|ending=vowel) ");
+		//LOG.info("result: " + result);
 		
 		System.out.println("\nResult:\t" + ((result >= 2) ? "Female" : "Male") + "\n");
 	}
@@ -54,7 +60,7 @@ public class NaiveBayesClassifier {
 		String genderLen = (Math.abs(len-avgLength.get("F")) < Math.abs(len - avgLength.get("M"))) ? "F" : "M";
 		String genderProb = (avgLength.get("PFL")>avgLength.get("PML")) ? "F" : "M" ;
 		//LOG.info(name + " Prediction on len: " + genderLen + " Prediction on prob: " + genderProb);
-		return (genderLen.equals("F") || genderProb.equals("F")) ? "F" : "M"; //Prediction with respect to Females
+		return (genderLen.equals("F") && genderProb.equals("F")) ? "F" : "M"; //Prediction with respect to Females
 	}
 	
 	private String namesEndingInVowelFeature(String name) {
@@ -67,9 +73,30 @@ public class NaiveBayesClassifier {
 		}
 	}
 	
+	private String nameEndingFeature(String name) {
+		String nameEnd = name.substring(name.length() - 1);
+		HashMap<String, Double> namesEnd = Utilities.nameEnding(this.trainSet, nameEnd);
+		String genderProb = (namesEnd.get("PFE") > namesEnd.get("PME")) ? "F" : "M" ;
+		return (genderProb.equals("F")) ? "F" : "M"; //Prediction with respect to Females
+	}
+	
 	public void testModel() {
 		this.testNameLengthFeatureSet();
 		this.testnamesEndingInVowelFeatureSet();
+		this.testnameEnding();
+	}
+	
+	private void testnameEnding() {
+		Double rightPre = 0.0;
+		Double total = (double) this.testSet.size();
+		String gender;
+		for(Map.Entry<String, String> data: this.testSet.entrySet()) {
+			gender = this.nameEndingFeature(data.getKey());
+			rightPre = (gender.equals(data.getValue())) ? ++rightPre : rightPre;
+		}
+		System.out.println("Right predictions " + rightPre + " out of: " + total);
+		Double accuracy = (rightPre/total)*100;
+		System.out.println("Accuracy of Name ending in vowel feature set: " + accuracy + "%\n");
 	}
 	
 	private void testnamesEndingInVowelFeatureSet() {

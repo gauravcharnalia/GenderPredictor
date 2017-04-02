@@ -43,13 +43,46 @@ public class Utilities {
 		return testSet;
 	}
 	
-	public static void namesEndingInVowel(HashMap<String, String> trainSet) {
+	public static HashMap<String, Double> nameEnding(HashMap<String, String> dataSet, String nameEnd) {
+		Double feTotal = 1.0, mTotal = 1.0;
+		Double pFemale, pMale;
+		Double feNamesWithEnd = 0.0, mNamesWithEnd = 0.0;
+		Double pEndFemale, pEndMale;
+		for(Map.Entry<String, String> data: dataSet.entrySet()) {
+			if (data.getValue().equals("F")) {
+				feTotal++;
+				String indianName = data.getKey().substring(data.getKey().length() - 1);
+				if (indianName.equals(nameEnd))
+					feNamesWithEnd++;
+			}
+			else {
+				mTotal++;
+				String indianName = data.getKey().substring(data.getKey().length() - 1);
+				if (indianName.equals(nameEnd))
+					mNamesWithEnd++;
+			}
+		}
+		HashMap<String, Double> namesEnd = new HashMap<String, Double>();
+		
+		pFemale = feTotal/dataSet.size();
+		pMale = mTotal/dataSet.size();
+		
+		pEndFemale = (feNamesWithEnd/feTotal) * pFemale;
+		pEndMale = (mNamesWithEnd/mTotal) * pMale;
+		
+		namesEnd.put("PFE", pEndFemale);
+		namesEnd.put("PME", pEndMale);
+		
+		return namesEnd;
+	}
+	
+	public static void namesEndingInVowel(HashMap<String, String> dataSet) {
 		Double feTotal = 1.0, mTotal = 1.0;
 		Double pFemale, pMale;
 		Double feNamesWithVowels = 0.0, mNamesWithVowels = 0.0;
 		Double pVowelFemale, pVowelMale;
 		List<String> vowels = new ArrayList<>(Arrays.asList("A","E","I","O","U"));
-		for(Map.Entry<String, String> data: trainSet.entrySet()) {
+		for(Map.Entry<String, String> data: dataSet.entrySet()) {
 			if (data.getValue().equals("F")) {
 				feTotal++;
 				String name = data.getKey().substring(data.getKey().length() - 1);
@@ -65,21 +98,21 @@ public class Utilities {
 				}
 			}
 		}
-		pFemale = feTotal/trainSet.size();
-		pMale = mTotal/trainSet.size();
+		pFemale = feTotal/dataSet.size();
+		pMale = mTotal/dataSet.size();
 		
 		pVowelFemale = (feNamesWithVowels/feTotal) * pFemale;
 		pVowelMale = (mNamesWithVowels/mTotal) * pMale;
 		
-		System.out.println("P(Female|Ending=vowel)= " + pVowelFemale + "P(Male|Ending=vowel)= " + pVowelMale);
+		System.out.println("P(Female|Ending=vowel)= " + pVowelFemale + "\tP(Male|Ending=vowel)= " + pVowelMale);
 	}
 	
-	public static HashMap<String, Double> avgNameLength(HashMap<String, String> trainSet, int nameLen) {
+	public static HashMap<String, Double> avgNameLength(HashMap<String, String> dataSet, int nameLen) {
 		Double feTotal = 1.0, mTotal = 1.0;
 		Double feNameLength = 0.0, mNameLength = 0.0;
 		Double pLen_Female, pLen_Male, pFemale, pMale;
 		Double feNamesWithLen = 0.0, mNamesWithLen = 0.0;
-		for(Map.Entry<String, String> data: trainSet.entrySet()) {
+		for(Map.Entry<String, String> data: dataSet.entrySet()) {
 			if (data.getValue().equals("F")) {
 				feNameLength += data.getKey().length();
 				feTotal++;
@@ -99,8 +132,8 @@ public class Utilities {
 		avgLength.put("F", (double) (feNameLength/feTotal));
 		avgLength.put("M", (double) (mNameLength/mTotal));
 		
-		pFemale = feTotal/trainSet.size();
-		pMale = mTotal/trainSet.size();
+		pFemale = feTotal/dataSet.size();
+		pMale = mTotal/dataSet.size();
 		
 		pLen_Female = (feNamesWithLen/feTotal)*pFemale;
 		pLen_Male = (mNamesWithLen/mTotal)*pMale;
