@@ -24,6 +24,7 @@ public class GenderPredictor {
     public static void main(String[] args) throws IOException {
     	InputStreamReader isr = new InputStreamReader(System.in);
     	BufferedReader br = new BufferedReader(isr);
+    	String ch = "Y";
     	
         final CassandraConnector client = new CassandraConnector();
         client.connect();
@@ -41,9 +42,14 @@ public class GenderPredictor {
         // TODO: implement basic naives bayes classifier
         NaiveBayesClassifier nb = new NaiveBayesClassifier(session);
         nb.testModel();
-        System.out.println("Enter name to predict: ");
-        String name = br.readLine();
-        nb.classify(name.toUpperCase());
+        while (ch.equals("Y") || ch.equals("y")) {
+        	System.out.println("Enter name to predict: ");
+            String name = br.readLine();
+            nb.classify(name.toUpperCase());
+            System.out.println("Q/q to quit or Y/y to continue:");
+            ch = br.readLine();
+        }
+        
         // TODO: implement naives bayes classifier with feature selection options
         // TODO: Use model for predictions
         

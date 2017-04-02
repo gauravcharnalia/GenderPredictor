@@ -25,7 +25,7 @@ public class NaiveBayesClassifier {
 	
 	public void classify(String name) {
 		String predictedGender = (this.nameLengthFeature(name).equals("F")) ? "Female" : "Male";
-		System.out.println(predictedGender + "\tBy P(class|Length) and average name lenght ");
+		System.out.println(predictedGender + "\tBy P(class|Length) and average name length ");
 		
 		predictedGender = (this.namesEndingInVowelFeature(name).equals("F")) ? "Female" : "Male";
 		System.out.println(predictedGender + "\tBy P(class|ending=vowel) ");
