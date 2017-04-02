@@ -14,14 +14,20 @@ public class KeyspaceInitializer {
     }
     
     public void createTableIfNotExists(Session session) {
-        String query = "CREATE TABLE IF NOT EXISTS gender.genderTable"
+        String query = "CREATE TABLE IF NOT EXISTS gender.genderTableTrain"
             + "(indianName text PRIMARY KEY, "
         	+ "gender text );";
+    	session.execute(query);
+    	
+    	query = "CREATE TABLE IF NOT EXISTS gender.genderTableTest"
+                + "(indianName text PRIMARY KEY, "
+            	+ "gender text );";
     	session.execute(query);
     }
     
     public void truncateTable(Session session) {
-    	session.execute("TRUNCATE genderTable");
+    	session.execute("TRUNCATE genderTableTrain");
+    	session.execute("TRUNCATE genderTableTest");
     }
     
     public void useKeyspace(Session session) {

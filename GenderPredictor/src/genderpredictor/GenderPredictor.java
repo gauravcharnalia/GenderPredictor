@@ -1,6 +1,8 @@
 package genderpredictor;
 
 import com.datastax.driver.core.Session;
+
+import classifier.NaiveBayesClassifier;
 import genderpredictor.DatabaseHandlers.CassandraConnector;
 import genderpredictor.DatabaseHandlers.KeyspaceInitializer;
 import genderpredictor.DatabaseHandlers.LoadDataInKeyspace;
@@ -27,6 +29,10 @@ public class GenderPredictor {
         
         LoadDataInKeyspace ld = new LoadDataInKeyspace();
         ld.loadData(session);
+        
+        // TODO: implement basic naives bayes classifier
+        NaiveBayesClassifier nb = new NaiveBayesClassifier(session);
+        
         // TODO: implement naives bayes classifier with feature selection options
         // TODO: Use model for predictions
         
