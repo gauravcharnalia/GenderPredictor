@@ -1,5 +1,6 @@
 package genderpredictor.DatabaseHandlers;
 
+import com.datastax.driver.core.Session;
 import com.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class LoadDataInKeyspace {
     private static final String MALECSVFILE = "src/Resources/Dataset/Indian-Male-Names.csv";
     HashMap<String, String> dataset = new HashMap<String, String>();
     
-    public void loadData() {
+    public void loadData(Session session) {
         CSVReader reader = null;
         try {
             reader = new CSVReader(new FileReader(FEMALECSVFILE));
@@ -34,5 +35,6 @@ public class LoadDataInKeyspace {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
     }
 }

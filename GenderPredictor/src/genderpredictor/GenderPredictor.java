@@ -20,11 +20,13 @@ public class GenderPredictor {
         Session session = client.getSession();
         
         KeyspaceInitializer ks = new KeyspaceInitializer();
-        ks.createTableIfNotExists(session);
+        ks.createKeyspaceIfNotExists(session);
         ks.useKeyspace(session);
+        ks.createTableIfNotExists(session);
+        ks.truncateTable(session);
         
         LoadDataInKeyspace ld = new LoadDataInKeyspace();
-        ld.loadData();
+        ld.loadData(session);
         // TODO: implement naives bayes classifier with feature selection options
         // TODO: Use model for predictions
         
