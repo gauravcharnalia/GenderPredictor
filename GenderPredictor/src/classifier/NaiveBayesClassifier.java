@@ -21,7 +21,8 @@ public class NaiveBayesClassifier {
 	private HashMap<String, String> testSet;
 	
 	public void classify(String name) {
-		
+		String predictedGender = this.nameLengthFeature(name);
+		System.out.println(predictedGender);
 	}
 	
 	public NaiveBayesClassifier(Session session) {
@@ -36,8 +37,8 @@ public class NaiveBayesClassifier {
 		HashMap<String, Double> avgLength = Utilities.avgNameLength(this.testSet, name.length());
 		String genderLen = (Math.abs(len-avgLength.get("F")) < Math.abs(len - avgLength.get("M"))) ? "F" : "M";
 		String genderProb = (avgLength.get("PLF")>avgLength.get("PLM")) ? "F" : "M" ;
-		LOG.info(name + "prediction on len: " + genderLen + " Prediction on prob: " + genderProb);
-		return (genderLen.equals("F") && genderProb.equals("F")) ? "F" : "M";
+		//LOG.info(name + " Prediction on len: " + genderLen + " Prediction on prob: " + genderProb);
+		return (genderLen.equals("F") && genderProb.equals("F")) ? "F" : "M"; //Prediction with respect to Females
 	}
 	
 	public void testModel() {
