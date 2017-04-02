@@ -1,6 +1,9 @@
 package genderpredictor.DatabaseHandlers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -40,6 +43,37 @@ public class Utilities {
 		return testSet;
 	}
 	
+	public static void namesEndingInVowel(HashMap<String, String> trainSet) {
+		Double feTotal = 1.0, mTotal = 1.0;
+		Double pFemale, pMale;
+		Double feNamesWithVowels = 0.0, mNamesWithVowels = 0.0;
+		Double pVowelFemale, pVowelMale;
+		List<String> vowels = new ArrayList<>(Arrays.asList("A","E","I","O","U"));
+		for(Map.Entry<String, String> data: trainSet.entrySet()) {
+			if (data.getValue().equals("F")) {
+				feTotal++;
+				String name = data.getKey().substring(data.getKey().length() - 1);
+				if (vowels.contains(name.substring(name.length() - 1))) {
+					feNamesWithVowels++;
+				}
+			}
+			else {
+				mTotal++;
+				String name = data.getKey().substring(data.getKey().length() - 1);
+				if (vowels.contains(name.substring(name.length() - 1))) {
+					mNamesWithVowels++;
+				}
+			}
+		}
+		pFemale = feTotal/trainSet.size();
+		pMale = mTotal/trainSet.size();
+		
+		pVowelFemale = (feNamesWithVowels/feTotal) * pFemale;
+		pVowelMale = (mNamesWithVowels/mTotal) * pMale;
+		
+		System.out.println("P(Female|Ending=vowel)= " + pVowelFemale + "P(Male|Ending=vowel)= " + pVowelMale);
+	}
+	
 	public static HashMap<String, Double> avgNameLength(HashMap<String, String> trainSet, int nameLen) {
 		Double feTotal = 1.0, mTotal = 1.0;
 		Double feNameLength = 0.0, mNameLength = 0.0;
@@ -71,8 +105,8 @@ public class Utilities {
 		pLen_Female = (feNamesWithLen/feTotal)*pFemale;
 		pLen_Male = (mNamesWithLen/mTotal)*pMale;
 		
-		avgLength.put("PLF", pLen_Female);
-		avgLength.put("PLM", pLen_Male);
+		avgLength.put("PFL", pLen_Female);
+		avgLength.put("PML", pLen_Male);
 		
 		//LOG.info("P(Length=" + nameLen + "|Female): " + pLen_Female + "P(Length=" + nameLen + "|Male): " + pLen_Male);
 		
