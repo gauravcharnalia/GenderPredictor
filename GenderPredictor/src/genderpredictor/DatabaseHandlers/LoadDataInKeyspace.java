@@ -16,22 +16,14 @@ public class LoadDataInKeyspace {
 	// Logging
     private static final Logger LOG = Logger.getLogger(CassandraConnector.class.getName());
 	
-    private static final String FEMALECSVFILE = "src/Resources/Dataset/Indian-Female-Names.csv";
-    private static final String MALECSVFILE = "src/Resources/Dataset/Indian-Male-Names.csv";
+    private static final String NAMESCSVFILE = "src/Resources/Dataset/Indian-Names.csv";
+    
     HashMap<String, String> dataset = new HashMap<String, String>();
     
     public void loadData(Session session) {
         CSVReader reader = null;
         try {
-            reader = new CSVReader(new FileReader(FEMALECSVFILE));
-            String[] row;
-            while((row = reader.readNext()) != null) 
-                dataset.put(row[0].toUpperCase(), row[1].toUpperCase());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            reader = new CSVReader(new FileReader(MALECSVFILE));
+            reader = new CSVReader(new FileReader(NAMESCSVFILE));
             String[] row;
             while((row = reader.readNext()) != null) 
                 dataset.put(row[0].toUpperCase(), row[1].toUpperCase());
