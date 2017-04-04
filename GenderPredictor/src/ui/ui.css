@@ -1,0 +1,9 @@
+@font-face {
+    src: url('../Resources/fonts/AlegreyaSans-Light.otf');
+    -fx-font-weight: normal;
+    -fx-font-style: normal;
+}
+.background {
+    -fx-background-color: #F5F5F5;
+}
+

@@ -21,7 +21,7 @@ public class GenderPredictor {
      * @param args the command line arguments
      * @throws IOException 
      */
-    public static void main(String[] args) throws IOException {
+    public void appInitializer(String[] args) throws IOException {
     	InputStreamReader isr = new InputStreamReader(System.in);
     	BufferedReader br = new BufferedReader(isr);
     	String ch = "Y";
