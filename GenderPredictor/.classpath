@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="/home/gaurav/git/Local-GenderPredictor/GenderPredictor/src/Resources/Jars/netty-all-4.1.9.Final.jar"/>
 	<classpathentry kind="lib" path="/home/gaurav/git/Local-GenderPredictor/GenderPredictor/src/Resources/Jars/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="/home/gaurav/git/Local-GenderPredictor/GenderPredictor/src/Resources/Jars/vertx-simplest-2.2.101.jar"/>
+	<classpathentry kind="lib" path="/home/gaurav/git/Local-GenderPredictor/GenderPredictor/src/Resources/Jars/jfoenix.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
