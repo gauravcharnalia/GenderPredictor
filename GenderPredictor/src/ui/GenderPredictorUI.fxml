@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="650.0" prefWidth="1200.0" styleClass="background" stylesheets="@ui.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="ui.GenderPredictorUIController.java">
-	<!-- TODO Add Nodes -->
+<AnchorPane prefHeight="420.0" prefWidth="720.0" styleClass="background" stylesheets="@ui.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.GenderPredictorUIController">
+   <children>
+      <Label layoutX="50.0" layoutY="44.0" styleClass="fileLabel" stylesheets="@ui.css" text="Dataset File:" AnchorPane.leftAnchor="50.0" />
+      <Label layoutX="189.0" layoutY="45.0" styleClass="fileName" stylesheets="@ui.css" text="Indian-Names.csv" />
+      <JFXComboBox focusColor="#00acc1" layoutX="63.0" layoutY="102.0" prefHeight="31.0" prefWidth="124.0" promptText="Choose feature" stylesheets="@ui.css" AnchorPane.leftAnchor="50.0" />
+      <Label layoutX="413.0" layoutY="178.0" styleClass="fileLabel" stylesheets="@ui.css" text="Right Predictions:" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="186.0" />
+      <Label fx:id="rPre" layoutX="608.0" layoutY="186.0" prefHeight="31.0" prefWidth="61.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="186.0" />
+      <Label layoutX="399.0" layoutY="247.0" styleClass="fileLabel" stylesheets="@ui.css" text="Wrong Predictions:" AnchorPane.leftAnchor="399.0" AnchorPane.topAnchor="247.0" />
+      <Label fx:id="wPre" layoutX="614.0" layoutY="247.0" prefHeight="31.0" prefWidth="61.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="247.0" />
+      <Label layoutX="482.0" layoutY="307.0" styleClass="fileLabel" stylesheets="@ui.css" text="Accuracy:" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="482.0" AnchorPane.topAnchor="307.0" />
+      <Label fx:id="acc" layoutX="624.0" layoutY="257.0" prefHeight="31.0" prefWidth="61.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="307.0" />
+      <Separator layoutX="357.0" layoutY="178.0" orientation="VERTICAL" prefHeight="150.0" AnchorPane.bottomAnchor="75.0" AnchorPane.topAnchor="186.0" />
+      <JFXTextField focusColor="#00acc1" layoutX="76.0" layoutY="251.0" prefHeight="31.0" prefWidth="250.0" promptText="Enter Name for Prediction:" styleClass="putField" stylesheets="@ui.css" unFocusColor="#00acc1" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="186.0" />
+      <Label layoutX="138.0" layoutY="247.0" styleClass="fileLabel" stylesheets="@ui.css" text="Result:" AnchorPane.leftAnchor="138.0" AnchorPane.topAnchor="247.0" />
+      <Label layoutX="138.0" layoutY="308.0" prefHeight="31.0" prefWidth="80.0" styleClass="resultField" stylesheets="@ui.css" AnchorPane.leftAnchor="134.0" AnchorPane.topAnchor="307.0" />
+   </children>
 </AnchorPane>

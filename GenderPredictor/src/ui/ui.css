@@ -6,4 +6,27 @@
 .background {
     -fx-background-color: #F5F5F5;
 }
-
+.fileLabel {
+	-fx-font-family: 'AlegreyaSans-Light';
+    -fx-font-size: 18;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5 5 5 5;
+    -fx-background-color: #00ACC1;
+}
+.fileName {
+	-fx-font-family: 'AlegreyaSans-Light';
+    -fx-font-size: 18;
+    -fx-padding: 5 5 5 5;
+}
+.resultField {
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #00ACC1;
+	-fx-border-color: #00ACC1;
+	-fx-font-size: 18;
+	-fx-border-width: 0 0 1 0;
+}
+.putField {
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #00ACC1;
+	-fx-padding: 10 10 10 10;
+}

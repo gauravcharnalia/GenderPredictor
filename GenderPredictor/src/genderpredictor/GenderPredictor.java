@@ -18,13 +18,12 @@ import genderpredictor.DatabaseHandlers.LoadDataInKeyspace;
 public class GenderPredictor {
 
     /**
-     * @param args the command line arguments
-     * @throws IOException 
+     * @param args the command line arguments 
      */
-    public void appInitializer(String[] args) throws IOException {
-    	InputStreamReader isr = new InputStreamReader(System.in);
+    public void appInitializer(String name) {
+    	/*InputStreamReader isr = new InputStreamReader(System.in);
     	BufferedReader br = new BufferedReader(isr);
-    	String ch = "Y";
+    	String ch = "Y";*/
     	
         final CassandraConnector client = new CassandraConnector();
         client.connect();
@@ -39,7 +38,6 @@ public class GenderPredictor {
         LoadDataInKeyspace ld = new LoadDataInKeyspace();
         ld.loadData(session);
         
-        // TODO: implement basic naives bayes classifier
         NaiveBayesClassifier nb = new NaiveBayesClassifier(session);
         nb.testModel();
         while (ch.equals("Y") || ch.equals("y")) {
@@ -49,9 +47,6 @@ public class GenderPredictor {
             System.out.println("Q/q to quit or Y/y to continue:");
             ch = br.readLine();
         }
-        
-        // TODO: implement naives bayes classifier with feature selection options
-        // TODO: Use model for predictions
         
         client.close();
     }
