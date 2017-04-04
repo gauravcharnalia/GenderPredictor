@@ -11,17 +11,17 @@
    <children>
       <Label layoutX="50.0" layoutY="44.0" styleClass="fileLabel" stylesheets="@ui.css" text="Dataset File:" AnchorPane.leftAnchor="50.0" />
       <Label layoutX="189.0" layoutY="45.0" styleClass="fileName" stylesheets="@ui.css" text="Indian-Names.csv" />
-      <JFXComboBox focusColor="#00acc1" layoutX="63.0" layoutY="102.0" prefHeight="31.0" prefWidth="250.0" promptText="Choose feature" stylesheets="@ui.css" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="102.0" />
+      <JFXComboBox fx:id="featureChoice" focusColor="#00acc1" layoutX="63.0" layoutY="102.0" prefHeight="31.0" prefWidth="250.0" promptText="Choose feature" stylesheets="@ui.css" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="102.0" />
       <Label layoutX="413.0" layoutY="178.0" styleClass="fileLabel" stylesheets="@ui.css" text="Right Predictions:" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="186.0" />
-      <Label fx:id="rPre" layoutX="608.0" layoutY="186.0" prefHeight="31.0" prefWidth="61.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="186.0" />
-      <Label layoutX="399.0" layoutY="247.0" styleClass="fileLabel" stylesheets="@ui.css" text="Wrong Predictions:" AnchorPane.leftAnchor="399.0" AnchorPane.topAnchor="247.0" />
-      <Label fx:id="wPre" layoutX="614.0" layoutY="247.0" prefHeight="31.0" prefWidth="61.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="247.0" />
+      <Label fx:id="rPre" layoutX="608.0" layoutY="186.0" prefHeight="31.0" prefWidth="81.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="186.0" />
+      <Label layoutX="399.0" layoutY="247.0" styleClass="fileLabel" stylesheets="@ui.css" text="Total:" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="247.0" />
+      <Label fx:id="total" layoutX="614.0" layoutY="247.0" prefHeight="31.0" prefWidth="81.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="247.0" />
       <Label layoutX="482.0" layoutY="307.0" styleClass="fileLabel" stylesheets="@ui.css" text="Accuracy:" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="482.0" AnchorPane.topAnchor="307.0" />
-      <Label fx:id="acc" layoutX="624.0" layoutY="257.0" prefHeight="31.0" prefWidth="61.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="307.0" />
+      <Label fx:id="acc" layoutX="624.0" layoutY="257.0" prefHeight="31.0" prefWidth="81.0" styleClass="resultField" AnchorPane.leftAnchor="608.0" AnchorPane.topAnchor="307.0" />
       <Separator layoutX="357.0" layoutY="178.0" orientation="VERTICAL" prefHeight="150.0" AnchorPane.bottomAnchor="75.0" AnchorPane.topAnchor="186.0" />
       <JFXTextField focusColor="#00acc1" layoutX="76.0" layoutY="251.0" prefHeight="31.0" prefWidth="250.0" promptText="Enter Name for Prediction:" styleClass="putField" stylesheets="@ui.css" unFocusColor="#00acc1" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="186.0" />
       <Label layoutX="138.0" layoutY="308.0" prefHeight="31.0" prefWidth="80.0" styleClass="resultField" stylesheets="@ui.css" AnchorPane.leftAnchor="134.0" AnchorPane.topAnchor="307.0" />
-      <JFXButton layoutX="332.0" layoutY="105.0" prefHeight="31.0" styleClass="fileLabel" stylesheets="@ui.css" text="Test" />
+      <JFXButton layoutX="332.0" layoutY="105.0" onAction="#testSelectedModel" prefHeight="31.0" styleClass="fileLabel" stylesheets="@ui.css" text="Test" />
       <JFXButton layoutX="141.0" layoutY="250.0" prefHeight="31.0" styleClass="fileLabel" stylesheets="@ui.css" text="Result" />
    </children>
 </AnchorPane>

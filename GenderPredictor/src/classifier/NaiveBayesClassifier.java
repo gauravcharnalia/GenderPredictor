@@ -80,13 +80,36 @@ public class NaiveBayesClassifier {
 		return (genderProb.equals("F")) ? "F" : "M"; //Prediction with respect to Females
 	}
 	
-	public void testModel() {
-		this.testNameLengthFeatureSet();
-		this.testnamesEndingInVowelFeatureSet();
-		this.testnameEnding();
+	public HashMap<String, Double> testAllFeatures() {
+		int vote = 0;
+		Double rightPre = 0.0;
+		Double total = (double) this.testSet.size();
+		String predictedGenderByNameLength, predictedGenderByLastVowel, predictedGenderByLast;
+		for(Map.Entry<String, String> data: this.testSet.entrySet()) {
+			
+			predictedGenderByNameLength = (this.nameLengthFeature(data.getKey()).equals("F") ? "Female" : "Male");
+			if (predictedGenderByNameLength.equals("Female"))	vote++;
+			
+			predictedGenderByLastVowel = (this.namesEndingInVowelFeature(data.getKey()).equals("F") ? "Female" : "Male");
+			if (predictedGenderByLastVowel.equals("Female"))	vote++;
+			
+			predictedGenderByLast = (this.nameEndingFeature(data.getKey()).equals("F") ? "Female" : "Male");
+			if (predictedGenderByLast.equals("Female")) vote++;
+			
+			rightPre = (vote >= 2) ? ++rightPre : rightPre;
+		}
+		LOG.info("Right predictions " + rightPre + " out of: " + total);
+		//Double accuracy = (rightPre/total)*100;
+		LOG.info("Accuracy of Name ending in vowel feature set: " + (rightPre/total)*100 + "%\n");
+		
+		HashMap<String, Double> result = new HashMap<>();
+		result.put("rPre", rightPre);
+		result.put("total", total);
+		
+		return result;
 	}
 	
-	private void testnameEnding() {
+	public HashMap<String, Double> testnameEndingFeatureSet() {
 		Double rightPre = 0.0;
 		Double total = (double) this.testSet.size();
 		String gender;
@@ -94,12 +117,18 @@ public class NaiveBayesClassifier {
 			gender = this.nameEndingFeature(data.getKey());
 			rightPre = (gender.equals(data.getValue())) ? ++rightPre : rightPre;
 		}
-		System.out.println("Right predictions " + rightPre + " out of: " + total);
-		Double accuracy = (rightPre/total)*100;
-		System.out.println("Accuracy of Name ending in vowel feature set: " + accuracy + "%\n");
+		LOG.info("Right predictions " + rightPre + " out of: " + total);
+		//Double accuracy = (rightPre/total)*100;
+		LOG.info("Accuracy of Name ending in vowel feature set: " + (rightPre/total)*100 + "%\n");
+		
+		HashMap<String, Double> result = new HashMap<>();
+		result.put("rPre", rightPre);
+		result.put("total", total);
+		
+		return result;
 	}
 	
-	private void testnamesEndingInVowelFeatureSet() {
+	public HashMap<String, Double> testnamesEndingInVowelFeatureSet() {
 		Double rightPre = 0.0;
 		Double total = (double) this.testSet.size();
 		String gender;
@@ -108,12 +137,18 @@ public class NaiveBayesClassifier {
 			rightPre = (gender.equals(data.getValue())) ? ++rightPre : rightPre;
 		}
 		Utilities.namesEndingInVowel(this.trainSet);
-		System.out.println("Right predictions " + rightPre + " out of: " + total);
-		Double accuracy = (rightPre/total)*100;
-		System.out.println("Accuracy of Name ending in vowel feature set: " + accuracy + "%\n");
+		LOG.info("Right predictions " + rightPre + " out of: " + total);
+		//Double accuracy = (rightPre/total)*100;
+		LOG.info("Accuracy of Name ending in vowel feature set: " + (rightPre/total)*100 + "%\n");
+		
+		HashMap<String, Double> result = new HashMap<>();
+		result.put("rPre", rightPre);
+		result.put("total", total);
+		
+		return result;
 	}
 	
-	private void testNameLengthFeatureSet() {
+	public HashMap<String, Double> testNameLengthFeatureSet() {
 		Double rightPre = 0.0;
 		Double total = (double) this.testSet.size();
 		String gender;
@@ -121,9 +156,15 @@ public class NaiveBayesClassifier {
 			gender = this.nameLengthFeature(data.getKey());
 			rightPre = (gender.equals(data.getValue())) ? ++rightPre : rightPre;
 		}
-		System.out.println("Right predictions " + rightPre + " out of: " + total);
-		Double accuracy = (rightPre/total)*100;
-		System.out.println("Accuracy of Name length feature set: " + accuracy + "%\n");
+		LOG.info("Right predictions " + rightPre + " out of: " + total);
+		//Double accuracy = (rightPre/total)*100;
+		LOG.info("Accuracy of Name ending in vowel feature set: " + (rightPre/total)*100 + "%\n");
+		
+		HashMap<String, Double> result = new HashMap<>();
+		result.put("rPre", rightPre);
+		result.put("total", total);
+		
+		return result;
 	}
 	
 }
