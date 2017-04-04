@@ -23,7 +23,7 @@ public class NaiveBayesClassifier {
 	private HashMap<String, String> trainSet;
 	private HashMap<String, String> testSet;
 	
-	public void classify(String name) {
+	public String allFeatures(String name) {
 		int result = 0;
 		
 		String predictedGenderByNameLength = (this.nameLengthFeature(name).equals("F")) ? "Female" : "Male";
@@ -45,6 +45,8 @@ public class NaiveBayesClassifier {
 		//LOG.info("result: " + result);
 		
 		System.out.println("\nResult:\t" + ((result >= 2) ? "Female" : "Male") + "\n");
+		LOG.info("Naive bayes class" + ((result >= 2) ? "F" : "M") );
+		return ((result >= 2) ? "F" : "M");
 	}
 	
 	public NaiveBayesClassifier(Session session) {
@@ -54,7 +56,7 @@ public class NaiveBayesClassifier {
 		LOG.info("No of testing data records: " + this.testSet.size() + "\n");
 	}
 	
-	private String nameLengthFeature(String name) {
+	public String nameLengthFeature(String name) {
 		Double len = (double) name.length();
 		HashMap<String, Double> avgLength = Utilities.avgNameLength(this.trainSet, name.length());
 		String genderLen = (Math.abs(len-avgLength.get("F")) < Math.abs(len - avgLength.get("M"))) ? "F" : "M";
@@ -63,7 +65,7 @@ public class NaiveBayesClassifier {
 		return (genderLen.equals("F") && genderProb.equals("F")) ? "F" : "M"; //Prediction with respect to Females
 	}
 	
-	private String namesEndingInVowelFeature(String name) {
+	public String namesEndingInVowelFeature(String name) {
 		List<String> vowels = new ArrayList<>(Arrays.asList("A","E","I","O","U"));
 		if (vowels.contains(name.substring(name.length() - 1 ))) {
 			return "F";
@@ -73,7 +75,7 @@ public class NaiveBayesClassifier {
 		}
 	}
 	
-	private String nameEndingFeature(String name) {
+	public String nameEndingFeature(String name) {
 		String nameEnd = name.substring(name.length() - 1);
 		HashMap<String, Double> namesEnd = Utilities.nameEnding(this.trainSet, nameEnd);
 		String genderProb = (namesEnd.get("PFE") > namesEnd.get("PME")) ? "F" : "M" ;

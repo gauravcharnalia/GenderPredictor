@@ -1,16 +1,5 @@
 package genderpredictor;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import com.datastax.driver.core.Session;
-
-import classifier.NaiveBayesClassifier;
-import genderpredictor.DatabaseHandlers.CassandraConnector;
-import genderpredictor.DatabaseHandlers.KeyspaceInitializer;
-import genderpredictor.DatabaseHandlers.LoadDataInKeyspace;
-
 /**
  *
  * @author Gaurav
@@ -25,9 +14,9 @@ public class GenderPredictor {
     	BufferedReader br = new BufferedReader(isr);
     	String ch = "Y";*/
     	
-        final CassandraConnector client = new CassandraConnector();
+        /*final CassandraConnector client = new CassandraConnector();
         client.connect();
-        Session session = client.getSession();
+        Session session = client.getSession();*/
         
         /*KeyspaceInitializer ks = new KeyspaceInitializer();
         ks.createKeyspaceIfNotExists(session);
@@ -35,8 +24,8 @@ public class GenderPredictor {
         ks.createTableIfNotExists(session);
         ks.truncateTable(session);*/
         
-        LoadDataInKeyspace ld = new LoadDataInKeyspace();
-        ld.loadData(session);
+        /*LoadDataInKeyspace ld = new LoadDataInKeyspace();
+        ld.loadData(session);*/
         
         /*NaiveBayesClassifier nb = new NaiveBayesClassifier(session);
         nb.testModel();
@@ -48,7 +37,7 @@ public class GenderPredictor {
             ch = br.readLine();
         }*/
         
-        client.close();
+        //client.close();
     }
     
 }

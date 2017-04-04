@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.datastax.driver.core.Session;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 
 import classifier.NaiveBayesClassifier;
 import genderpredictor.DatabaseHandlers.CassandraConnector;
@@ -36,6 +37,10 @@ public class GenderPredictorUIController implements Initializable{
 	private Label acc;
 	@FXML
 	private JFXComboBox<String> featureChoice;
+	@FXML
+	private JFXTextField userInput;
+	@FXML
+	private Label resultLabel;
 	
 	ObservableList<String> options = 
 			FXCollections.observableArrayList(
@@ -69,6 +74,31 @@ public class GenderPredictorUIController implements Initializable{
 		this.nb = new NaiveBayesClassifier(session);
 		
 		client.close();
+	}
+	
+	@FXML
+	private void genderPrediction(ActionEvent event) {
+		int choice = featureChoice.getSelectionModel().getSelectedIndex();
+		LOG.info("genderPrediction method");
+		String name = userInput.getText().toUpperCase();
+		LOG.info(name);
+		String result;
+		switch(choice) {
+			case 0: result = (this.nb.nameLengthFeature(name).equals("F") ? "Female" : "Male");
+					resultLabel.setText(result);
+					break;
+			case 1: result = (this.nb.namesEndingInVowelFeature(name).equals("F") ? "Female" : "Male");
+					resultLabel.setText(result);
+					break;
+			case 2: result = (this.nb.nameEndingFeature(name).equals("F") ? "Female" : "Male");
+					resultLabel.setText(result);
+					break;
+			case 3: result = (this.nb.allFeatures(name).equals("F") ? "Female" : "Male");
+					resultLabel.setText(result);
+					break;
+			default:LOG.info("" + choice);
+					break;
+		}
 	}
 	
 	@FXML
