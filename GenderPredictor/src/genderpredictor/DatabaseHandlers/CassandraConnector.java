@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  */
 public class CassandraConnector {
     // Cluster defaults
-    private static final String NODE = "localhost";
+    private static final String HOST = "localhost";
     private static final int PORT = 9042;
     // Logging
     private static final Logger LOG = Logger.getLogger(CassandraConnector.class.getName());
@@ -35,10 +35,10 @@ public class CassandraConnector {
             LOG.log(Level.INFO, "Datacenter: {0}, Host: {1}, Rack: {2}", new Object[]{host.getDatacenter(), host.getAddress(), host.getRack()});
         });
 
-        this.session = cluster.connect();
+        this.session = this.cluster.connect();
     }
     public void connect() {
-        this.connect(NODE, PORT);
+        this.connect(HOST, PORT);
     }
     
     /**

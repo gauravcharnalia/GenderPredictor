@@ -10,7 +10,7 @@ public class KeyspaceInitializer {
     
     public void createKeyspaceIfNotExists(Session session) {
         session.execute("CREATE KEYSPACE IF NOT EXISTS gender"
-            + " WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3}");
+            + " WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1}");
     }
     
     public void createTableIfNotExists(Session session) {
